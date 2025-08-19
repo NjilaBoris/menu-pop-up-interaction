@@ -20,41 +20,54 @@ const App = () => {
   const [isOpen, setIsOpen] = useState("close");
 
   return (
-    <div className="flex h-dvh relative items-center justify-center">
+    <div className="flex h-dvh  relative flex-col items-center justify-center">
       {isOpen == "close" && (
-        <motion.span
+        <motion.div
           layoutId="card"
           onClick={() => setIsOpen("open")}
           whileTap={{ scale: 0.98 }}
           transition={{
-            ease: "easeInOut",
+            ease: [0.25, 0.46, 0.45, 0.94],
             type: "spring",
             bounce: 0.1,
             duration: 0.3,
           }}
-          className="border cursor-pointer border-neutral-300/100 rounded-xl p-3 shadow-xl"
+          style={{ borderRadius: 13 }}
+          className=" border flex items-center justify-center cursor-pointer border-neutral-300/100  p-3 shadow-xl"
         >
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <Menu className="size-8 text-neutral-600/80" />
+          <motion.span className="">
+            <motion.span layout="position">
+              <Menu className="size-8 text-neutral-600/80" />
+            </motion.span>
           </motion.span>
-        </motion.span>
+        </motion.div>
       )}
-      <MotionConfig transition={{ type: "spring", bounce: 0.1, duration: 0.3 }}>
-        <AnimatePresence mode="popLayout">
+
+      <MotionConfig
+        transition={{
+          type: "spring",
+          bounce: 0.1,
+          duration: 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+      >
+        <AnimatePresence mode="popLayout" initial={false}>
           {isOpen == "open" && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               layoutId="card"
-              className="border-2 w-full gap-2.5 max-w-[20rem] flex text-left flex-col border-neutral-300/100 p-5 rounded-xl relative"
+              style={{ borderRadius: "12px" }}
+              className="border-2 w-full gap-2.5 max-w-[20rem] flex text-left flex-col border-neutral-300/100 p-5  relative"
             >
               <span className="font-semibold text-[1.1rem] text-neutral-400/100">
                 Menu
               </span>
               <motion.span
                 onClick={() => setIsOpen("close")}
-                className="border top-1 right-1 cursor-pointer absolute flex items-center justify-center size-7 rounded-full shadow-sm border-neutral-300/100 p-1"
+                style={{ borderRadius: "50%" }}
+                className="border top-1 right-1 cursor-pointer absolute flex items-center justify-center size-7  shadow-sm border-neutral-300/100 p-1"
               >
                 <X className="text-neutral-600 size-5" />
               </motion.span>
@@ -78,9 +91,10 @@ const App = () => {
                 </motion.div>
               </AnimatePresence>
               <motion.button
-                exit={{ opacity: 0 }}
+                exit={{ opacity: 0, scale: 0 }}
+                style={{ borderRadius: "1rem" }}
                 onClick={() => setIsOpen("close")}
-                className="items-center flex justify-center gap-3.5 rounded-2xl cursor-pointer bg-neutral-900/100 text-white font-medium p-4"
+                className="items-center flex justify-center gap-3.5  cursor-pointer bg-neutral-900/100 text-white font-medium p-4"
               >
                 <span>Get Started</span>
                 <span>

@@ -20,20 +20,15 @@ const App = () => {
   const [isOpen, setIsOpen] = useState("close");
 
   return (
-    <div className="flex h-dvh flex-col items-center justify-center">
+    <div className="flex h-dvh relative items-center justify-center">
       {isOpen == "close" && (
         <motion.span
-          transition={{
-            type: "spring",
-            bounce: 0.3,
-            duration: 0.5,
-          }}
           layoutId="card"
           onClick={() => setIsOpen("open")}
           whileTap={{ scale: 0.98 }}
           className="border cursor-pointer border-neutral-300/100 rounded-xl p-3 shadow-xl"
         >
-          <motion.span layout="position">
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Menu className="size-8 text-neutral-600/80" />
           </motion.span>
         </motion.span>
@@ -44,7 +39,6 @@ const App = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ type: "spring", bounce: 0.1, duration: 0.3 }}
               exit={{ opacity: 0 }}
               layoutId="card"
               className="border-2 w-full gap-2.5 max-w-[20rem] flex text-left flex-col border-neutral-300/100 p-5 rounded-xl relative"
@@ -52,12 +46,12 @@ const App = () => {
               <span className="font-semibold text-[1.1rem] text-neutral-400/100">
                 Menu
               </span>
-              <span
+              <motion.span
                 onClick={() => setIsOpen("close")}
                 className="border top-1 right-1 cursor-pointer absolute flex items-center justify-center size-7 rounded-full shadow-sm border-neutral-300/100 p-1"
               >
                 <X className="text-neutral-600 size-5" />
-              </span>
+              </motion.span>
               <AnimatePresence>
                 <motion.div
                   exit={{ opacity: 0 }}

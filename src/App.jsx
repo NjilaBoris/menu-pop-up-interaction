@@ -26,6 +26,12 @@ const App = () => {
           layoutId="card"
           onClick={() => setIsOpen("open")}
           whileTap={{ scale: 0.98 }}
+          transition={{
+            ease: "easeInOut",
+            type: "spring",
+            bounce: 0.1,
+            duration: 0.3,
+          }}
           className="border cursor-pointer border-neutral-300/100 rounded-xl p-3 shadow-xl"
         >
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
